@@ -24,3 +24,11 @@ def classification_step(inputs: ExtractionOutput) -> ClassificationOutput:
         return ClassificationOutput(category="Unknown", confidence=0.30)
         
     return ClassificationOutput(category="Invoice", confidence=0.95)
+def summarization_step(intake: IntakeOutput, classification: ClassificationOutput) -> FinalSummaryOutput:
+    """Step 4: Compile the final processing summary output."""
+    summary_text = f"Document processed as {classification.category} with {classification.confidence * 100}% confidence."
+    return FinalSummaryOutput(
+        document_id=intake.document_id,
+        category=classification.category,
+        summary_text=summary_text
+    )
