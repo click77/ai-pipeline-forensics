@@ -17,3 +17,10 @@ def extraction_step(inputs: IntakeOutput) -> ExtractionOutput:
         return ExtractionOutput(dates=["2026-06-15"], amounts=[100.0, 50.0], currencies=["USD", "EUR"])
         
     return ExtractionOutput(dates=["2026-06-15"], amounts=[1500.0], currencies=["USD"])
+def classification_step(inputs: ExtractionOutput) -> ClassificationOutput:
+    """Step 3: Classify document type based on extractions. Deliberately drops confidence if ambiguous."""
+    # Deliberate Failure Mode: Ambiguous Category (No explicit financial attributes)
+    if not inputs.amounts:
+        return ClassificationOutput(category="Unknown", confidence=0.30)
+        
+    return ClassificationOutput(category="Invoice", confidence=0.95)
