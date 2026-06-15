@@ -1,0 +1,2 @@
+# Base requirements for the failure forensics tool
+pydantic==2.5.2
